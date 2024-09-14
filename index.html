@@ -168,6 +168,13 @@
             // frontImageElement.src = frontImages[frontIndex];
             backImageElement.src = backImages[backIndex];
         }
+        // Preload all images in backImages array
+        function preloadImages() {
+            backImages.forEach((src) => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
 
         // 随机选择DLC内容
         function loadRandomDLCContent() {
@@ -199,6 +206,7 @@
 
         // 页面加载时先显示图片，然后加载DLC数据，最后加载文字
         window.onload = function () {
+            preloadImages();
             // 立即加载随机图片
             loadRandomImages();
 
