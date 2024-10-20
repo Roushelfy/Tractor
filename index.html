@@ -1,267 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>双升DLC</title>
-    <style>
-      /* 页面布局 */
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: "KaiTi", "楷体", serif;
-        /* 设置全局字体为楷书 */
-        background-color: #f0f0f0;
-        perspective: 1000px;
-        /* 用于 3D 效果 */
-      }
 
-      /* 包裹两面内容的容器，包含正反面 */
-      .flip-container {
-        width: 50vw;
-        /* Still 50% of the viewport width */
-        height: auto;
-        /* Let the height adjust based on the aspect ratio */
-        aspect-ratio: 243 / 163;
-        /* Set the aspect ratio for the card */
-        transform-style: preserve-3d;
-        transition: transform 0.8s;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>双升DLC</title>
+  <style>
+    /* 页面布局 */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "KaiTi", "楷体", serif;
+      /* 设置全局字体为楷书 */
+      background-color: #f0f0f0;
+      perspective: 1000px;
+      /* 用于 3D 效果 */
+    }
 
-        position: relative;
-        cursor: pointer;
-      }
+    /* 包裹两面内容的容器，包含正反面 */
+    .flip-container {
+      width: 50vw;
+      /* Still 50% of the viewport width */
+      height: auto;
+      /* Let the height adjust based on the aspect ratio */
+      aspect-ratio: 243 / 163;
+      /* Set the aspect ratio for the card */
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
 
-      /* 正反面样式 */
-      .flip-container .front,
-      .flip-container .back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        /* 隐藏背面内容 */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
 
-        /* 确保front和back绝对定位 */
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 10px;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    /* 正反面样式 */
+    .flip-container .front,
+    .flip-container .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      /* 隐藏背面内容 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-        background-image: url("img/back/1.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
+      /* 确保front和back绝对定位 */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 
-      /* 背面样式 */
-      .flip-container .back {
-        transform: rotateX(180deg);
-        /* 初始背面旋转180度 */
-      }
+      background-image: url("img/back/1.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-      /* 翻转效果 */
-      .flip-container.flip {
-        transform: rotateX(180deg);
-      }
+    /* 背面样式 */
+    .flip-container .back {
+      transform: rotateX(180deg);
+      /* 初始背面旋转180度 */
+    }
 
-      .overlay-text {
-        position: absolute;
-        color: rgb(17, 232, 71);
-        /* Set the main text color to white */
-        font-size: calc(3vw + 3vh);
-        text-align: center;
-        font-family: "KaiTi", "楷体", serif;
+    /* 翻转效果 */
+    .flip-container.flip {
+      transform: rotateX(180deg);
+    }
 
-        /* Create a black outline (stroke effect) around the white text */
-        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-          1px 1px 0 black;
-        max-height: 50vh; /* Set a maximum height, e.g., 50% of viewport height */
-        overflow-y: auto;
-        /* Four shadows to create a full black outline around the text */
-      }
+    .overlay-text {
+      position: absolute;
+      color: rgb(17, 232, 71);
+      /* Set the main text color to white */
+      font-size: calc(3vw + 3vh);
+      text-align: center;
+      font-family: "KaiTi", "楷体", serif;
 
-      img {
-        width: 150%;
-        height: 150%;
-        /* Adjust height automatically based on width to preserve aspect ratio */
-        /* object-fit: contain;
+      /* Create a black outline (stroke effect) around the white text */
+      text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+        1px 1px 0 black;
+      max-height: 45vh;
+      overflow-y: auto;
+      /* Four shadows to create a full black outline around the text */
+    }
+
+    img {
+      width: 150%;
+      height: 150%;
+      /* Adjust height automatically based on width to preserve aspect ratio */
+      /* object-fit: contain;
             /* Ensure the entire image fits inside the container */
-        /* max-width: 100%;
+      /* max-width: 100%;
             max-height: 100%;
             position: relative; */
-        /* Avoid absolute positioning to prevent cutting off */
-        /* top: 0;
+      /* Avoid absolute positioning to prevent cutting off */
+      /* top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             margin: 0;
             padding: 0; */
+    }
+
+    @media (max-aspect-ratio: 1/1) {
+      .flip-container {
+        rotate: 90deg;
+        width: 90vw;
       }
 
-      @media (max-aspect-ratio: 1/1) {
-        .flip-container {
-          rotate: 90deg;
-          width: 90vw;
-        }
-        .overlay-text {
-          rotate: 270deg;
-          font-size: calc(3vw + 3vh);
-          width: 66%;
-        }
+      .overlay-text {
+        rotate: 270deg;
+        font-size: calc(3vw + 3vh);
+        width: 66%;
       }
-    </style>
-  </head>
+    }
+  </style>
+</head>
 
-  <body>
-    <!-- 容器：正反面包裹 -->
-    <div class="flip-container" id="flip-container" onclick="flipCard()">
-      <!-- 正面 -->
-      <div class="front" id="front">
-        <!-- 图片容器 -->
-        <p class="overlay-text" id="front-content"></p>
-        <!-- 覆盖文字 -->
-      </div>
-      <!-- 背面 -->
-      <div class="back" id="back">
-        <img id="back-image" src="" alt="Back Card" />
-        <p class="overlay-text" id="back-content">
-          结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里
-        </p>
-        <!-- 覆盖文字 -->
-      </div>
+<body>
+  <!-- 容器：正反面包裹 -->
+  <div class="flip-container" id="flip-container" onclick="flipCard()">
+    <!-- 正面 -->
+    <div class="front" id="front">
+      <!-- 图片容器 -->
+      <p class="overlay-text" id="front-content"></p>
+      <!-- 覆盖文字 -->
     </div>
+    <!-- 背面 -->
+    <div class="back" id="back">
+      <img id="back-image" src="" alt="Back Card" />
+      <p class="overlay-text" id="back-content">
+        结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里结果将显示在这里
+      </p>
+      <!-- 覆盖文字 -->
+    </div>
+  </div>
 
-    <script>
-      let dlcData = []; // 用于存储DLC数据
-      let isFlipped = false; // 跟踪卡片是否翻转
+  <script>
+    let dlcData = []; // 用于存储DLC数据
+    let isFlipped = false; // 跟踪卡片是否翻转
 
-      // 从DLC.json加载数据
-      function loadDLCData() {
-        return fetch("DLC.json")
-          .then((response) => response.json())
-          .then((data) => {
-            dlcData = data;
-          })
-          .catch((error) => {
-            console.error("Error loading DLC.json:", error);
-          });
-      }
-
-      // 正面图片的目录
-      const backImages = [
-        "img/svg_front/2_of_clubs.svg",
-        "img/svg_front/2_of_diamonds.svg",
-        "img/svg_front/2_of_hearts.svg",
-        "img/svg_front/2_of_spades.svg",
-        "img/svg_front/3_of_clubs.svg",
-        "img/svg_front/3_of_diamonds.svg",
-        "img/svg_front/3_of_hearts.svg",
-        "img/svg_front/3_of_spades.svg",
-        "img/svg_front/4_of_clubs.svg",
-        "img/svg_front/4_of_diamonds.svg",
-        "img/svg_front/4_of_hearts.svg",
-        "img/svg_front/4_of_spades.svg",
-        "img/svg_front/5_of_clubs.svg",
-        "img/svg_front/5_of_diamonds.svg",
-        "img/svg_front/5_of_hearts.svg",
-        "img/svg_front/5_of_spades.svg",
-        "img/svg_front/6_of_clubs.svg",
-        "img/svg_front/6_of_diamonds.svg",
-        "img/svg_front/6_of_hearts.svg",
-        "img/svg_front/6_of_spades.svg",
-        "img/svg_front/7_of_clubs.svg",
-        "img/svg_front/7_of_diamonds.svg",
-        "img/svg_front/7_of_hearts.svg",
-        "img/svg_front/7_of_spades.svg",
-        "img/svg_front/8_of_clubs.svg",
-        "img/svg_front/8_of_diamonds.svg",
-        "img/svg_front/8_of_hearts.svg",
-        "img/svg_front/8_of_spades.svg",
-        "img/svg_front/9_of_clubs.svg",
-        "img/svg_front/9_of_diamonds.svg",
-        "img/svg_front/9_of_hearts.svg",
-        "img/svg_front/9_of_spades.svg",
-        "img/svg_front/10_of_clubs.svg",
-        "img/svg_front/10_of_diamonds.svg",
-        "img/svg_front/10_of_hearts.svg",
-        "img/svg_front/10_of_spades.svg",
-        "img/svg_front/ace_of_clubs.svg",
-        "img/svg_front/ace_of_diamonds.svg",
-        "img/svg_front/ace_of_hearts.svg",
-        "img/svg_front/ace_of_spades.svg",
-      ];
-
-      // 背面图片的目录 (示例，你可以替换为实际背面图片的路径)
-      const frontImages = ["img/back/back.png"];
-
-      // 随机选择图片
-      function loadRandomImages() {
-        const frontIndex = Math.floor(Math.random() * frontImages.length);
-        const backIndex = Math.floor(Math.random() * backImages.length);
-
-        //const frontImageElement = document.getElementById('front-image');
-        const backImageElement = document.getElementById("back-image");
-
-        // 设置正面和背面的随机图片
-        // frontImageElement.src = frontImages[frontIndex];
-        backImageElement.src = backImages[backIndex];
-      }
-      // Preload all images in backImages array
-      function preloadImages() {
-        backImages.forEach((src) => {
-          const img = new Image();
-          img.src = src;
+    // 从DLC.json加载数据
+    function loadDLCData() {
+      return fetch("DLC.json")
+        .then((response) => response.json())
+        .then((data) => {
+          dlcData = data;
+        })
+        .catch((error) => {
+          console.error("Error loading DLC.json:", error);
         });
-      }
+    }
 
+    // 正面图片的目录
+    const backImages = [
+      "img/svg_front/2_of_clubs.svg",
+      "img/svg_front/2_of_diamonds.svg",
+      "img/svg_front/2_of_hearts.svg",
+      "img/svg_front/2_of_spades.svg",
+      "img/svg_front/3_of_clubs.svg",
+      "img/svg_front/3_of_diamonds.svg",
+      "img/svg_front/3_of_hearts.svg",
+      "img/svg_front/3_of_spades.svg",
+      "img/svg_front/4_of_clubs.svg",
+      "img/svg_front/4_of_diamonds.svg",
+      "img/svg_front/4_of_hearts.svg",
+      "img/svg_front/4_of_spades.svg",
+      "img/svg_front/5_of_clubs.svg",
+      "img/svg_front/5_of_diamonds.svg",
+      "img/svg_front/5_of_hearts.svg",
+      "img/svg_front/5_of_spades.svg",
+      "img/svg_front/6_of_clubs.svg",
+      "img/svg_front/6_of_diamonds.svg",
+      "img/svg_front/6_of_hearts.svg",
+      "img/svg_front/6_of_spades.svg",
+      "img/svg_front/7_of_clubs.svg",
+      "img/svg_front/7_of_diamonds.svg",
+      "img/svg_front/7_of_hearts.svg",
+      "img/svg_front/7_of_spades.svg",
+      "img/svg_front/8_of_clubs.svg",
+      "img/svg_front/8_of_diamonds.svg",
+      "img/svg_front/8_of_hearts.svg",
+      "img/svg_front/8_of_spades.svg",
+      "img/svg_front/9_of_clubs.svg",
+      "img/svg_front/9_of_diamonds.svg",
+      "img/svg_front/9_of_hearts.svg",
+      "img/svg_front/9_of_spades.svg",
+      "img/svg_front/10_of_clubs.svg",
+      "img/svg_front/10_of_diamonds.svg",
+      "img/svg_front/10_of_hearts.svg",
+      "img/svg_front/10_of_spades.svg",
+      "img/svg_front/ace_of_clubs.svg",
+      "img/svg_front/ace_of_diamonds.svg",
+      "img/svg_front/ace_of_hearts.svg",
+      "img/svg_front/ace_of_spades.svg",
+    ];
+
+    // 背面图片的目录 (示例，你可以替换为实际背面图片的路径)
+    const frontImages = ["img/back/back.png"];
+
+    // 随机选择图片
+    function loadRandomImages() {
+      const frontIndex = Math.floor(Math.random() * frontImages.length);
+      const backIndex = Math.floor(Math.random() * backImages.length);
+
+      //const frontImageElement = document.getElementById('front-image');
+      const backImageElement = document.getElementById("back-image");
+
+      // 设置正面和背面的随机图片
+      // frontImageElement.src = frontImages[frontIndex];
+      backImageElement.src = backImages[backIndex];
+    }
+    // Preload all images in backImages array
+    function preloadImages() {
+      backImages.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+
+    // 随机选择DLC内容
+    function loadRandomDLCContent() {
       // 随机选择DLC内容
-      function loadRandomDLCContent() {
-        // 随机选择DLC内容
-        if (dlcData.length > 0) {
-          const randomIndex = Math.floor(Math.random() * dlcData.length);
-          const selectedItem = dlcData[randomIndex];
-          document.getElementById("front-content").innerText = "启动";
-          document.getElementById(
-            "back-content"
-          ).innerText = `${selectedItem.name}：${selectedItem.content}`;
-        }
+      if (dlcData.length > 0) {
+        const randomIndex = Math.floor(Math.random() * dlcData.length);
+        const selectedItem = dlcData[randomIndex];
+        document.getElementById("front-content").innerText = "启动";
+        document.getElementById(
+          "back-content"
+        ).innerText = `${selectedItem.name}：${selectedItem.content}`;
       }
+    }
 
-      // 翻转卡片
-      function flipCard() {
-        const flipContainer = document.getElementById("flip-container");
+    // 翻转卡片
+    function flipCard() {
+      const flipContainer = document.getElementById("flip-container");
 
-        // 如果卡片已翻转，直接翻回正面
-        if (isFlipped) {
-          flipContainer.classList.remove("flip");
-          isFlipped = false;
-        } else {
-          // 如果是从正面翻转，才随机换图片和内容
-          loadRandomImages();
-          loadRandomDLCContent();
-          flipContainer.classList.add("flip");
-          isFlipped = true;
-        }
-      }
-
-      // 页面加载时先显示图片，然后加载DLC数据，最后加载文字
-      window.onload = function () {
-        preloadImages();
-        // 立即加载随机图片
+      // 如果卡片已翻转，直接翻回正面
+      if (isFlipped) {
+        flipContainer.classList.remove("flip");
+        isFlipped = false;
+      } else {
+        // 如果是从正面翻转，才随机换图片和内容
         loadRandomImages();
+        loadRandomDLCContent();
+        flipContainer.classList.add("flip");
+        isFlipped = true;
+      }
+    }
 
-        // 加载DLC数据后加载随机文字
-        loadDLCData().then(() => {
-          loadRandomDLCContent();
-        });
-      };
-    </script>
-  </body>
+    // 页面加载时先显示图片，然后加载DLC数据，最后加载文字
+    window.onload = function () {
+      preloadImages();
+      // 立即加载随机图片
+      loadRandomImages();
+
+      // 加载DLC数据后加载随机文字
+      loadDLCData().then(() => {
+        loadRandomDLCContent();
+      });
+    };
+  </script>
+</body>
+
 </html>
